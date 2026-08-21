@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 222 30% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 30% 10%;
+    --primary: 221 83% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 18% 94%;
+    --secondary-foreground: 222 30% 10%;
+    --muted: 220 12% 94%;
+    --muted-foreground: 220 9% 43%;
+    --accent: 221 83% 48%;
+    --border: 220 14% 89%;
+    --input: 220 14% 89%;
+    --ring: 221 83% 48%;
+    --radius: 0.9rem;
+    --surface: 220 20% 96%;
+  }
+
+  .dark {
+    --background: 222 28% 7%;
+    --foreground: 220 18% 94%;
+    --card: 222 24% 10%;
+    --card-foreground: 220 18% 94%;
+    --primary: 217 91% 65%;
+    --primary-foreground: 222 28% 7%;
+    --secondary: 222 20% 14%;
+    --secondary-foreground: 220 18% 94%;
+    --muted: 222 20% 14%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 217 91% 65%;
+    --border: 222 18% 19%;
+    --input: 222 18% 19%;
+    --ring: 217 91% 65%;
+    --surface: 222 24% 9%;
+  }
+
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+  }
+  button, a, input, textarea { font: inherit; }
+}
+
+@layer components {
+  .section-container { @apply container mx-auto px-5 sm:px-7 lg:px-10 max-w-6xl; }
+  .section-space { @apply py-24 md:py-32 relative; }
+  .section-tint { background: hsl(var(--surface)); }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-primary;
+  }
+
+  .display-title {
+    font-family: "Manrope", sans-serif;
+    @apply text-5xl sm:text-6xl lg:text-[5.25rem] font-extrabold tracking-[-0.055em] leading-[0.98];
+  }
+  .section-title {
+    font-family: "Manrope", sans-serif;
+    @apply text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.045em] leading-tight;
+  }
+  .title-dot { color: hsl(var(--primary)); }
+  .section-heading { @apply mb-12 md:mb-14; }
+  .section-lead { @apply text-base md:text-lg text-muted-foreground max-w-2xl leading-7 md:leading-8 mt-4; }
+
+  .hero-role { @apply text-lg sm:text-xl font-semibold text-foreground/80 mt-6; }
+  .hero-copy { @apply text-base sm:text-lg text-muted-foreground leading-7 md:leading-8 max-w-xl mt-4; }
+  .hero-location { @apply text-sm text-muted-foreground pl-2 border-l border-border; }
+
+  .button-primary, .button-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300;
+  }
+  .button-primary {
+    @apply bg-primary text-primary-foreground hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20;
+  }
+  .button-secondary {
+    @apply border border-border bg-background/50 text-foreground hover:-translate-y-0.5 hover:bg-secondary;
+  }
+
+  .social-link {
+    @apply w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground transition-all duration-300 hover:text-foreground hover:border-primary/50 hover:-translate-y-0.5;
+  }
+
+  .clean-card, .project-card, .cert-card {
+    @apply rounded-2xl border border-border bg-card p-6 transition-all duration-300;
+  }
+  .clean-card:hover, .project-card:hover, .cert-card:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 18px 45px hsl(var(--foreground) / 0.06);
+    border-color: hsl(var(--primary) / 0.28);
+  }
+  .card-icon {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center text-primary bg-primary/10;
+  }
+  .card-title { font-family: "Manrope", sans-serif; @apply text-lg font-bold mt-4; }
+  .tag { @apply inline-flex rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-foreground/80; }
+
+  .skill-panel { @apply min-h-[190px]; }
+  .project-card { @apply min-h-[350px] flex flex-col; }
+  .project-kicker { @apply text-xs font-semibold text-primary mb-2; }
+  .project-title { font-family: "Manrope", sans-serif; @apply text-xl font-bold tracking-tight; }
+  .project-description { @apply text-base text-muted-foreground leading-7 mt-3 max-w-xl; }
+  .project-link { @apply inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors; }
+
+  .profile-wrap { @apply relative w-64 h-64 sm:w-80 sm:h-80; }
+  .profile-image { @apply absolute inset-4 rounded-full overflow-hidden border border-border bg-card shadow-2xl; }
+  .profile-image img { @apply w-full h-full object-cover transition-transform duration-700 ease-out; }
+  .profile-image:hover img { transform: scale(1.06); }
+  .profile-ring {
+    @apply absolute inset-0 rounded-full border border-primary/25;
+    animation: slow-spin 18s linear infinite;
+  }
+  .profile-ring::after {
+    content: "";
+    position: absolute;
+    width: 10px; height: 10px;
+    top: 14%; right: 5%;
+    border-radius: 999px;
+    background: hsl(var(--primary));
+    box-shadow: 0 0 0 6px hsl(var(--primary) / 0.10);
+  }
+  .profile-note { @apply absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-2xl border border-border bg-card/90 backdrop-blur px-5 py-3 flex items-baseline gap-2 shadow-xl; }
+  .note-value { font-family: "Manrope", sans-serif; @apply text-xl font-extrabold; }
+  .note-label { @apply text-[10px] uppercase tracking-widest text-muted-foreground; }
+
+  .nav-glass { @apply border-b border-border/80 bg-background/80 backdrop-blur-xl; }
+  .brand { font-family: "Manrope", sans-serif; @apply text-xl font-extrabold tracking-tight; }
+  .brand span { @apply text-primary; }
+  .nav-link { @apply px-3 py-2 rounded-full text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors duration-300; }
+  .theme-button { @apply w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors; }
+  .mobile-menu { @apply border-t border-border bg-background/95 backdrop-blur-xl; }
+  .mobile-link { @apply block w-full text-left px-6 py-3.5 text-sm text-muted-foreground hover:text-foreground; }
+
+  .contact-shell { @apply max-w-3xl mx-auto; }
+  .email-link { @apply inline-flex items-center gap-2 mt-7 text-sm font-semibold text-foreground hover:text-primary transition-colors; }
+  .contact-form { @apply mt-10 rounded-3xl border border-border bg-card p-5 sm:p-7 flex flex-col gap-4; }
+  .field { @apply w-full rounded-xl border border-border bg-secondary/50 px-4 py-3.5 text-base text-foreground placeholder:text-muted-foreground outline-none transition-all focus:border-primary/50 focus:ring-2 focus:ring-primary/10; }
+
+  .site-footer { @apply border-t border-border py-7 text-xs text-muted-foreground; }
+
+  .hero-gradient {
+    background:
+      radial-gradient(circle at 75% 30%, hsl(var(--primary) / 0.10), transparent 28%),
+      radial-gradient(circle at 25% 70%, hsl(var(--primary) / 0.05), transparent 24%);
+  }
+  .dot-pattern {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .hero-orb { @apply absolute rounded-full pointer-events-none; filter: blur(70px); }
+  .hero-orb-one { width: 180px; height: 180px; top: 18%; right: 8%; background: hsl(var(--primary) / 0.08); }
+  .hero-orb-two { width: 150px; height: 150px; bottom: 15%; left: 5%; background: hsl(var(--primary) / 0.05); }
+  .scroll-cue { @apply absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground; }
+}
+
+@keyframes slow-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
